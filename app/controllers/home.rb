@@ -4,9 +4,17 @@ module Home
   class Index
     include Lotus::Action
 
-    def call(params)
+    # Whitelist
+    params do
+      param :message
+    end
+
+    def initialize
       self.format = :html
-      status 200, 'Hello world!'
+    end
+
+    def call(params)
+      status 200, "Hello #{params[:message]}"
     end
   end
 end
