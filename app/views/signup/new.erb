@@ -1,0 +1,36 @@
+<form action="/signup/create" method="POST">
+  <fieldset>
+    <label for="email">E-mail</label>
+    <input type="email" name="email" id="email"/>
+    <% if errors and errors.for(:email).any? %>
+        <p>Please enter a valid E-mail address</p>
+    <% end %>
+  </fieldset>
+  <fieldset>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password"/>
+    <% if errors and errors.for(:password).any? %>
+      <% errors.for(:password).each do |error| %>
+        <% if error.validation == :presence %>
+            <p>Please enter a valid password</p>
+        <% end %>
+        <% if error.validation == :confirmation %>
+            <p>Please ensure password and confirmation match</p>
+        <% end %>
+      <% end %>
+    <% end %>
+  </fieldset>
+  <fieldset>
+    <label for="password_confirmation">Password Confirmation</label>
+    <input type="password" name="password_confirmation" id="password_confirmation"/>
+    <% if errors and errors.for(:password).any? %>
+        <% errors.for(:password).each do |error| %>
+            <% if error.validation == :confirmation %>
+                <p>Please ensure password and confirmation match</p>
+            <% end %>
+        <% end %>
+    <% end %>
+  </fieldset>
+  <input type="hidden" name="csrf_token" value="<%= csrf_token %>">
+  <input type="submit" value="Sign up">
+</form>
