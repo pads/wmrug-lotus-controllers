@@ -8,3 +8,7 @@ A repository to show examples of [Lotus controllers](http://lotusrb.org/guides/a
     bundle exec rackup
     
 Navigate to http://localhost:9292    
+
+# Running the Tests
+
+    bundle exec rake test
