@@ -1,4 +1,4 @@
-require 'lotus-controller'
+require 'lotus/controller'
 
 module Home
   class Show
