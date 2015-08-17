@@ -1,16 +1,22 @@
 require 'rack/router'
+require 'lotus/controller'
 require 'erb'
 
 require_relative 'app/controllers/home'
 require_relative 'app/controllers/signup'
+require_relative 'app/controllers/api/users'
 
 class App
 
   Lotus::Controller.configure do
-    # TODO: configure stuff here...
+    # TODO: not honouring this?
+    default_format :json
   end
 
   def call(env)
+
+    # HTML Client Routes
+
     home_index = lambda do |env|
       action = Home::Show.new
       response = action.call(env)
@@ -42,11 +48,26 @@ class App
       action.call(env)
     end
 
+    # API Client Routes
+
+    api_users_index = lambda do |env|
+      action = Api::Users::Index.new
+      action.call(env)
+    end
+
     router = Rack::Router.new do
+
+      # HTML Client Routes
+
       get '/' => home_index
       get '/signup' => signup_new
       post '/signup/create' => signup_create
       get '/signup/thanks' => signup_thanks
+
+      # JSON Client Routes
+
+      get '/api/users' => api_users_index
+
     end
 
     router.call(env)
