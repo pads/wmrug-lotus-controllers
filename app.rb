@@ -55,6 +55,13 @@ class App
       action.call(env)
     end
 
+    api_users_show = lambda do |env|
+      action = Api::Users::Show.new
+      action.call(env)
+    end
+
+    # Router Setup
+
     router = Rack::Router.new do
 
       # HTML Client Routes
@@ -67,6 +74,7 @@ class App
       # JSON Client Routes
 
       get '/api/users' => api_users_index
+      get '/api/users/:id' => api_users_show
 
     end
 
