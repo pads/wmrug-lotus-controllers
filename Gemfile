@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
+gem 'rack'
+gem 'rack-contrib'
+gem 'rack-router'
 gem 'lotus-controller'
 
 group :development do

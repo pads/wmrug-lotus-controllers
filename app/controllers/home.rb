@@ -1,7 +1,7 @@
 require 'lotus-controller'
 
 module Home
-  class Index
+  class Show
     include Lotus::Action
     expose :message
 

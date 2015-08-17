@@ -28,4 +28,12 @@ module Signup
       end
     end
   end
+
+  class Thanks
+    include Lotus::Action
+
+    def call(params)
+      status 200, '<h1>Thank You</h1><p>We will be in touch soon.</p>'
+    end
+  end
 end
