@@ -2,6 +2,7 @@ require 'rack/router'
 require 'lotus/controller'
 require 'erb'
 
+require_relative 'app/controllers/admin'
 require_relative 'app/controllers/home'
 require_relative 'app/controllers/signup'
 require_relative 'app/controllers/api/users'
@@ -16,6 +17,11 @@ class App
   def call(env)
 
     # HTML Client Routes
+
+    admin_index = lambda do |env|
+      action = Admin::Index.new
+      action.call(env)
+    end
 
     home_index = lambda do |env|
       action = Home::Show.new
@@ -67,6 +73,7 @@ class App
       # HTML Client Routes
 
       get '/' => home_index
+      get '/admin' => admin_index
       get '/signup' => signup_new
       post '/signup/create' => signup_create
       get '/signup/thanks' => signup_thanks
