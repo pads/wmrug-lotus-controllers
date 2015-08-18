@@ -8,7 +8,9 @@ describe Api do
     describe 'Index Action' do
 
       before do
-        @action = Api::Users::Index.new
+        @repository = Minitest::Mock.new
+        @repository.expect :all, [{ mocked: true, name: 'Ben' }]
+        @action = Api::Users::Index.new(repository: @repository)
       end
 
       it 'should return a 200 response code' do
@@ -23,17 +25,12 @@ describe Api do
 
       it 'should return a list of users' do
         users = JSON.generate users: [
-            { lotus_gem: 'lotus', name: 'Andy' },
-            { lotus_gem: 'utils', name: 'Jon' },
-            { lotus_gem: 'views', name: 'Rob' },
-            { lotus_gem: 'model', name: 'Omar' },
-            { lotus_gem: 'helpers', name: 'Adre' },
-            { lotus_gem: 'controller', name: 'Ben' },
-            { lotus_gem: 'router', name: 'Kevin' },
-            { lotus_gem: 'validations', name: 'Matt' }
+          { mocked: true, name: 'Ben' }
         ]
 
         response = @action.call({})
+
+        @repository.verify
         response[2][0].must_equal users
       end
 
