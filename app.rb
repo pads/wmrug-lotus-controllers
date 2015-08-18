@@ -12,6 +12,9 @@ class App
   Lotus::Controller.configure do
     # TODO: not honouring this?
     default_format :json
+    #TODO: cookies
+    #TODO: cache
+    #TODO: sessions
   end
 
   def call(env)
