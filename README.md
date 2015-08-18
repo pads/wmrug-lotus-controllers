@@ -5,6 +5,7 @@ A repository to show examples of [Lotus controllers](http://lotusrb.org/guides/a
 # Getting Started
 
     bundle
+    bundle exec setup
     bundle exec rackup
     
 Navigate to http://localhost:9292    
