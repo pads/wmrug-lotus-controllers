@@ -4,10 +4,10 @@ require_relative '../../app/controllers/home'
 
 describe Home do
 
-  describe 'Index Action' do
+  describe 'Show Action' do
 
     before do
-      @action = Home::Index.new
+      @action = Home::Show.new
     end
 
     it 'should return the message passed to it via params' do
